@@ -4,8 +4,8 @@ A python-based high-throughput scientific name mapping algorithm
 
 ## In a nutshell
 
-<pre><code>phylosophos_initialize_update.py</code></pre>
-<pre><code>phylosophos_core.py</code></pre>
+<pre><code>python phylosophos_initialize_update.py [optional_update_parameter]</code></pre>
+<pre><code>python phylosophos_core.py [[optional_parameter_type] [optional_parameter_value]]</code></pre>
 
 ## Summary
 

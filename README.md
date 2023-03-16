@@ -1,4 +1,4 @@
-# P hyloSophos
+# PhyloSophos
 
 A python-based high-throughput scientific name mapping algorithm
 

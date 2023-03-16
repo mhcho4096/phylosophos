@@ -355,7 +355,7 @@ def tax_rule_screening(string):
 	string_list = string.split()
 
 	# Non-organism flag
-	remove_key = ['collection', 'construct', 'library', 'plasmid', 'sequence', 'transposon', 'vector']
+	remove_key = ['collection', 'construct', 'library', 'plasmid', 'sequence', 'transposon', 'vector', "<<"]
 	for trs_1 in remove_key:
 		if trs_1 in string_list:
 			return 90

@@ -58,6 +58,9 @@ def main():
 	if "result" not in os.listdir(base_path):
 		os.mkdir(base_path+"result\\")
 
+	if "previous" not in os.listdir(base_path+pp_path):
+		os.mkdir(base_path+pp_path+"previous\\")
+
 	# Archiving previous dictionary
 	pdir_flist = os.listdir(base_path + pp_path)
 	if len(pdir_flist) > 1:

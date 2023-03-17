@@ -29,23 +29,23 @@ base_path = os.path.realpath(__file__)[:-21]
 ef_path = "external_files\\"
 pp_path = "pp_ref\\"
 
+ssl._create_default_https_context = ssl._create_unverified_context
+
 ####
 
 def gbif_tax_update(ustat, fdir, rdir):
 
-	# Download step
-
-	context = ssl._create_unverified_context()
+	# Download step	
 
 	tar_gbif_url = "https://hosted-datasets.gbif.org/datasets/backbone/current/"
 	tar_gbif_file = "backbone.zip"
 	fdlist = os.listdir(fdir)
 	if ustat >= 1:
-		request.urlretrieve(tar_gbif_url+tar_gbif_file, fdir+tar_gbif_file, context=context)
+		request.urlretrieve(tar_gbif_url+tar_gbif_file, fdir+tar_gbif_file)
 		print("## GBIF taxonomy updated file download completed")
 	else:
 		if tar_gbif_file not in fdlist:
-			request.urlretrieve(tar_gbif_url+tar_gbif_file, fdir+tar_gbif_file, context=context)
+			request.urlretrieve(tar_gbif_url+tar_gbif_file, fdir+tar_gbif_file)
 			print("## GBIF taxonomy file download completed")
 		else:
 			print("## GBIF taxonomy file found in local system")

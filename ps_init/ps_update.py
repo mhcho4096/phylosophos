@@ -16,6 +16,7 @@
 
 import numpy
 import os
+import ssl
 import sys
 import tarfile
 import zipfile
@@ -28,15 +29,17 @@ def ncbi_tax_update_new(ustat, fdir, rdir):
 
 	# Download step
 
+	context = ssl._create_unverified_context()
+
 	tar_ncbi_url = "https://ftp.ncbi.nih.gov/pub/taxonomy/"
 	tar_ncbi_file = "taxdump.tar.gz"
 	fdlist = os.listdir(fdir)
 	if ustat >= 1:
-		request.urlretrieve(tar_ncbi_url+tar_ncbi_file, fdir+tar_ncbi_file)
+		request.urlretrieve(tar_ncbi_url+tar_ncbi_file, fdir+tar_ncbi_file, context=context)
 		print("## NCBI taxonomy updated file download completed")
 	else:
 		if tar_ncbi_file not in fdlist:
-			request.urlretrieve(tar_ncbi_url+tar_ncbi_file, fdir+tar_ncbi_file)
+			request.urlretrieve(tar_ncbi_url+tar_ncbi_file, fdir+tar_ncbi_file, context=context)
 			print("## NCBI taxonomy file download completed")
 		else:
 			print("## NCBI taxonomy file found in local system")
@@ -133,15 +136,17 @@ def col_tax_update_new(ustat, fdir, rdir, f_vname):
 
 	# Download step
 
+	context = ssl._create_unverified_context()
+
 	tar_col_url = "http://download.catalogueoflife.org/col/"
 	tar_col_file = f_vname
 	fdlist = os.listdir(fdir)
 	if ustat >= 1:
-		request.urlretrieve(tar_col_url+tar_col_file, fdir+tar_col_file)
+		request.urlretrieve(tar_col_url+tar_col_file, fdir+tar_col_file, context=context)
 		print("## CoL taxonomy updated file download completed")
 	else:
 		if tar_col_file not in fdlist:
-			request.urlretrieve(tar_col_url+tar_col_file, fdir+tar_col_file)
+			request.urlretrieve(tar_col_url+tar_col_file, fdir+tar_col_file, context=context)
 			print("## CoL taxonomy file download completed")
 		else:
 			print("## CoL taxonomy file found in local system")
@@ -262,15 +267,17 @@ def eol_tax_update_new(ustat, fdir, rdir, f_vname):
 
 	# Download step
 
+	context = ssl._create_unverified_context()
+
 	tar_eol_url = "https://opendata.eol.org/dataset/0a023d9a-f8c3-4c80-a8d1-1702475cda18/resource/00adb47b-57ed-4f6b-8f66-83bfdb5120e8/download/"
 	tar_eol_file = f_vname
 	fdlist = os.listdir(fdir)
 	if ustat >= 1:
-		request.urlretrieve(tar_eol_url+tar_eol_file, fdir+tar_eol_file)
+		request.urlretrieve(tar_eol_url+tar_eol_file, fdir+tar_eol_file, context=context)
 		print("## EoL taxonomy updated file download completed")
 	else:
 		if tar_eol_file not in fdlist:
-			request.urlretrieve(tar_eol_url+tar_eol_file, fdir+tar_eol_file)
+			request.urlretrieve(tar_eol_url+tar_eol_file, fdir+tar_eol_file, context=context)
 			print("## EoL taxonomy file download completed")
 		else:
 			print("## EoL taxonomy file found in local system")

@@ -749,6 +749,9 @@ def phylosophos_sequential_mapping(string, ref_sel, cut_dist, tr_list, rn_dict, 
 		pc_map_stat[:] = [pc_rule_stat for j in tr_list]
 		return [[], [], [], []], pc_map_stat
 
+	if cut_dist == 0: # Ignore edit-distance based mapping process if cutoff distance is zero
+		return pc_map_map, pc_map_stat
+
 	# Step 4. (intrageneric) edit distance-based mapping
 
 	corr_string = input_correction(string)[0]

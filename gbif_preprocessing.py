@@ -16,6 +16,7 @@
 
 import numpy
 import os
+import ssl
 import sys
 import tarfile
 import zipfile

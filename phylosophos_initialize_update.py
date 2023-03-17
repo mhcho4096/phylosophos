@@ -19,7 +19,7 @@
 import datetime
 import numpy
 import os
-import sys
+import ssl
 import sys
 import tarfile
 import zipfile

@@ -109,7 +109,7 @@ def string_split_correction(string):
 def input_correction(string):
 	#
 	ignore_list = ['sp.', 'ssp.', 'genomosp.', 'genosp.', 'subsp.', 'var.', 'str.', 'f.', 'pv.', 'bv.', 's.', 's.l.', 
-	'al.', 'sect.', 'subgen.', 'nom.', 'no.', "species"]
+	'al.', 'sect.', 'subgen.', 'nom.', 'no.', "species", "var."]
 	dropout_list = ['cf.', 'aff.', 'nr.', 'n.', 's.n.', 'nov.', 'gen.', 'inval.']
 	hybrid_list = ['×', 'x', 'x']
 	#
@@ -132,7 +132,11 @@ def input_correction(string):
 		else:
 			tar_temp.append(ic_1)
 	#
-	return ' '.join(tar_temp), stat_code
+	tar_str = ' '.join(tar_temp)
+	if "[syn." in tar_str:
+		tar_str = tar_str.split("[syn.")[0].rstrip(' ')
+	#
+	return tar_str, stat_code
 
 def latin_correction(tar_psd):
 	#
@@ -708,6 +712,53 @@ def in_depth_edit_dist(string, cut_dist, tr_list, rn_dict, rg_dict, rr_dict):
 	#
 	return idd_match, idd_stat
 
+## Partial mapping sequence
+
+def partial_mapping(string, tr_list, rn_dict, rg_dict, rr_dict):
+	#
+	tar_str = string.lower()
+	pm_match = [[] for j in tr_list]
+	pm_stat = [1000 for j in tr_list]
+	#
+	tar_split_list = tar_str.split()
+	for pm_1 in range(len(tar_split_list)):
+		tar_partial = ' '.join(tar_split_list[:(len(tar_split_list)-pm_1)])
+		tar_part_corr, tar_part_cstat = input_correction(tar_str)
+		for pm_2 in range(len(tr_list)):
+			if pm_stat[pm_2] > 100:
+				tar_det = 0
+				if tar_partial in rr_dict[tr_list[pm_2]]:
+					pm_match[pm_2].extend(rr_dict[tr_list[pm_2]][tar_partial])
+					pm_stat[pm_2] = 100
+					tar_det += 1
+				elif tar_part_cstat[1] == 0 and tar_part_corr in rr_dict[tr_list[pm_2]]:
+					pm_match[pm_2].extend(rr_dict[tr_list[pm_2]][tar_part_corr])
+					pm_stat[pm_2] = 100
+					tar_det += 1
+				#
+				if tar_det >= 1:
+					for pm_3 in range(len(tr_list)):
+						if pm_stat[pm_3] > 100:
+							syn_sub = []
+							for pm_4 in pm_match[pm_2]:
+								syn_sub.append(rn_dict[tr_list[pm_2]][pm_4][1])
+								if len(rn_dict[tr_list[pm_2]][pm_4][2]) >= 1:
+									ssl_2 = rn_dict[tr_list[pm_2]][pm_4][2].split("|")
+									for pm_5 in ssl_2:
+										if len(pm_5) >= 1 and pm_5 in rn_dict[tr_list[pm_2]][pm_4][1]:
+											syn_sub.append(pm_5)
+							syn_sub = [j.lower() for j in numpy.unique(syn_sub) if len(j) >= 1]
+							syn_tar = []
+							for pm_6 in syn_sub:
+								if pm_6 in rr_dict[tr_list[pm_3]]:
+									syn_tar.extend(rr_dict[tr_list[pm_3]][pm_6])
+							if len(syn_tar) >= 1:
+								pm_match[pm_3][:] = syn_tar
+								pm_stat[pm_3] = 100
+	return pm_match, pm_stat
+	#
+
+
 ## Core mapping sequence
 
 def phylosophos_sequential_mapping(string, ref_sel, cut_dist, tr_list, rn_dict, rg_dict, rr_dict):
@@ -774,6 +825,12 @@ def phylosophos_sequential_mapping(string, ref_sel, cut_dist, tr_list, rn_dict, 
 			pc_map_stat[pc_1] = pc_stat_4[pc_1]
 
 	# Step 6. Mapping status return
+
+	pc_map_5, pc_stat_5 = partial_mapping(string, tr_list, rn_dict, rg_dict, rr_dict)
+	for pc_1 in range(len(tr_list)):
+		if pc_stat_5[pc_1] <= pc_map_stat[pc_1]:
+			pc_map_map[pc_1][:] = pc_map_5[pc_1][:]
+			pc_map_stat[pc_1] = pc_stat_5[pc_1]
 
 	return pc_map_map, pc_map_stat
 

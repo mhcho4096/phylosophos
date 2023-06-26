@@ -343,7 +343,10 @@ def eol_tax_update_new(ustat, fdir, rdir, f_vname):
 				t_det += 1
 		taxid_code[1].append(0)
 		if max(taxid_code[1]) <= 7:
-			taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3].split()[0], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
+			if "'" in taxid_dict[taxid_list[i_1]][3]:
+				taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
+			else:
+				taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3].split()[0], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
 		elif taxid_dict[taxid_list[i_1]][5] == "species" and " " in taxid_dict[taxid_list[i_1]][3] and taxid_dict[taxid_list[i_1]][3][0].isupper() == True:
 			taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3].split()[0] + " " + taxid_dict[taxid_list[i_1]][3].split()[1], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
 		else:

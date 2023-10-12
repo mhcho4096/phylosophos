@@ -28,6 +28,16 @@ PhyloSophos is a high-throughput scientific name processor which achieves greate
 
 Please refer to "phylosophos_guide.pdf" for detailed information on the package and instructions on how to use and modify it.
 
+## System requirements
+
+### Storage
+
+PhyloSophos requires a minimum of approximately 6.0GB of storage space for downloading and processing the metadata of three taxonomic reference databases (CoL, EoL, NCBI taxonomy) into base reference files. Importing GBIF adds an additional 7.0GB of storage space to accommodate its data.
+
+### Memory 
+
+PhyloSophos requires a minimum of 8GB RAM for conducting taxonomic mapping with three base reference files. An additional 8GB RAM is required for incorporating GBIF reference.
+
 ## Initialization guide
 
 PhyloSophos requires Numpy, along with other basic libraries of Python 3. Before initializing PhyloSophos to fit with your environment, please set up an environment with a python version >=3.7 (preferably with Conda), and install numpy (https://numpy.org/install/) as appropriate. 
@@ -44,7 +54,7 @@ For initialization purposes, the optional parameter will not affect downstream p
 
 In addition, there was an instance when the taxonomic databases changed the format of their metadata, making the initialization script non-functional. If this happens, please notify me immediately (see contact information).
 
-## Update guide
+## Taxonomic reference update guide
 
 Again, taxonomic reference update uses phylosophos_initialize_update.py script. You may execute this script as:
 

@@ -6,6 +6,7 @@ A python-based high-throughput scientific name mapping algorithm
 
 ```
 python phylosophos_initialize_update.py [optional_update_parameter]
+
 python phylosophos_core.py [[optional_parameter_type] [optional_parameter_value]]
 ```
 
@@ -23,7 +24,7 @@ A script for initialization and update is phylosophos_initialize_update.py. This
 
 <pre><code>python phylosophos_initialize_update.py [optional_update_parameter]</code></pre>
 
-For initialization purposes, the optional parameter will not affect downstream processes. It is possible for Catalogue of Life and Encyclopedia of Life to change the name of the metadata file in their FTP server. If this happens, please change file names in the script (see lines 76 & 77) as appropriate.
+For initialization purposes, the optional parameter will not affect downstream processes. It is possible for Catalogue of Life and Encyclopedia of Life to change the name of the metadata file in their FTP server. If this happens, please change file names in the phylosophos_initialize_update.py (see lines 76 & 77) as appropriate.
 
 In addition, there was an instance when the taxonomic databases changed the format of their metadata, making the initialization script non-functional. If this happens, please notify me immediately (see contact information).
 

@@ -70,17 +70,17 @@ PhyloSophos result file has the following format (delimited by tabs). Each colum
 
 * Input_file_name: Name of input file which contains given scientific name input
 * Input_original_order: The order in which the scientific name is contained in the file
-● Raw_name_input: Raw scientific name input, as it is appeared in the input file
-● Pre_corrected_input: Pre-corrected scientific name input
-● Chosen_reference: Reference of choice (e.g. 'ncbi', 'col', 'eol')
-● Chosen_reference_mapped_ID: Taxonomic entry ID(s) mapped to given scientific name input (based on reference of choice)
-● Chosen_reference_scientific_name: Canonical scientific name(s) associated with mapped taxonomic ID(s) (based on reference of choice)
-● Chosen_reference_mapping_status_code: PhyloSophos mapping status code (based on reference of choice)
-● Chosen_reference_mapping_status_description: Short description of mapping status code (based on reference of choice)
-● (specific_reference)\_mapped\_id: Taxonomic entry ID(s) mapped to given scientific name input (based on specific reference)
-● (specific_reference)\_scientific\_name: Canonical scientific name(s) associated with mapped taxonomic ID(s) (based on specific reference)
-● (specific_reference)\_mapping\_status_code: PhyloSophos mapping status code (based on specific reference)
-● Manual_curation_recommended: Mapping status code-based opinion on whether manual curation is needed for this mapping result
+* Raw_name_input: Raw scientific name input, as it is appeared in the input file
+* Pre_corrected_input: Pre-corrected scientific name input
+* Chosen_reference: Reference of choice (e.g. 'ncbi', 'col', 'eol')
+* Chosen_reference_mapped_ID: Taxonomic entry ID(s) mapped to given scientific name input (based on reference of choice)
+* Chosen_reference_scientific_name: Canonical scientific name(s) associated with mapped taxonomic ID(s) (based on reference of choice)
+* Chosen_reference_mapping_status_code: PhyloSophos mapping status code (based on reference of choice)
+* Chosen_reference_mapping_status_description: Short description of mapping status code (based on reference of choice)
+* (specific_reference)\_mapped\_id: Taxonomic entry ID(s) mapped to given scientific name input (based on specific reference)
+* (specific_reference)\_scientific\_name: Canonical scientific name(s) associated with mapped taxonomic ID(s) (based on specific reference)
+* (specific_reference)\_mapping\_status_code: PhyloSophos mapping status code (based on specific reference)
+* Manual_curation_recommended: Mapping status code-based opinion on whether manual curation is needed for this mapping result
 
 Each taxonomic reference found within /pp_ref directory provides [(specific\_reference)\_mapped\_id] - [(specific\_reference)\_scientific\_name] - [(specific\_reference)\_mapping_status\_code] column triplet. Base PhyloSophos provides 3 column triplets for CoL/EoL/NCBI taxonomy respectively.
 

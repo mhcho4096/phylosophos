@@ -52,7 +52,7 @@ PhyloSophos currently recognizes five types of optional parameter types.
 
 ## Result format guide
 
-The results of the PhyloSophos analysis will be deposited in the /result directory. The name of the result file will be 'phylosophos_result_[export_date]_[export_time]_[input_file_name]'. [export_date] and [export_time] will be six-digit numbers. 
+The results of the PhyloSophos analysis will be deposited in the /result directory. The name of the result file will be 'phylosophos_result_[export_date]__[export_time]__[input_file_name]'. [export_date] and [export_time] will be six-digit numbers. 
 
 ## Citing PhyloSophos
 

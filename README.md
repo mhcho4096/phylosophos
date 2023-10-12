@@ -18,6 +18,8 @@ A python-based high-throughput scientific name mapping algorithm
 ## In a nutshell
 
 ```
+git clone https://github.com/mhcho4096/phylosophos
+
 python phylosophos_initialize_update.py [optional_update_parameter]
 
 python phylosophos_core.py [[optional_parameter_type] [optional_parameter_value]]

@@ -6,8 +6,9 @@ A python-based high-throughput scientific name mapping algorithm
 
 - [In a nutshell](#in-a-nutshell)
 - [Summary](#summary)
+- [System requirements](#system-requirements)
 - [Initialization guide](#initialization-guide)
-- [Update guide](#update-guide)
+- [Taxonomic reference update guide](#taxonomic-reference-update-guide)
 - [Usage guide](#usage-guide)
 - [Result format guide](#result-format-guide)
 - [Citing PhyloSophos](#citing-phylosophos)

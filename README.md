@@ -76,7 +76,7 @@ PhyloSophos currently recognizes five types of optional parameters.
 * Levenshtein distance cutoff (-l, -lev, -cutoff): if one of these arguments is given, along with an integer value, PhyloSophos will change the edit distance cutoff (default setting = 3) to the specified value. 
 * Manual curation status (-m, -manual, -curation): if one of these arguments is given, along with a value 1, PhyloSophos will import /pp_learning/manual_curation_list.tsv and utilize this information to pre-process inputs. If not (as a default setting), PhyloSophos will not import extra information other than reference data files within /pp_ref directory.
 
-The following is the example result of executing PhyloSophos with a sample input file ("sample_scientific_name_inputs.txt"), which include 4,010 scientific name strings.
+The following is the example result of executing PhyloSophos with a sample input file ("sample_scientific_name_inputs.txt"), which includes 4,010 scientific name strings.
 
 ```
 

@@ -182,9 +182,13 @@ def col_tax_update_new(ustat, fdir, rdir, f_vname):
 				if len(ssl[11]) == 0:
 					taxid_dict[ssl[0]][3] += ssl[8]
 				else:
-					t_temp = [ssl[11]]
-					t_temp.extend(ssl[13:16])
-					taxid_dict[ssl[0]][3] += ' '.join([j for j in t_temp if len(j) >= 1])
+					if len(ssl[12]) >= 1 and ssl[7] == "subgenus":
+						t_temp = [ssl[12]]
+						taxid_dict[ssl[0]][3] += ' '.join([j for j in t_temp if len(j) >= 1])
+					else:
+						t_temp = [ssl[11]]
+						t_temp.extend(ssl[13:16])
+						taxid_dict[ssl[0]][3] += ' '.join([j for j in t_temp if len(j) >= 1])
 	print("## CoL taxonomic accepted data extraction completed", len(taxid_dict))
 	with open(fdir+"col_taxdump\\Taxon.tsv", errors="ignore") as inp_f:
 		inp_f.readline()
@@ -195,9 +199,13 @@ def col_tax_update_new(ustat, fdir, rdir, f_vname):
 					if len(ssl[11]) == 0:
 						taxid_dict[ssl[2]][4].append(ssl[8])
 					else:
-						t_temp = [ssl[11]]
-						t_temp.extend(ssl[13:16])
-						taxid_dict[ssl[2]][4].append(' '.join([j for j in t_temp if len(j) >= 1]))
+						if len(ssl[12]) >= 1 and ssl[7] == "subgenus":
+							t_temp = [ssl[12]]
+							taxid_dict[ssl[2]][4] += ' '.join([j for j in t_temp if len(j) >= 1])
+						else:
+							t_temp = [ssl[11]]
+							t_temp.extend(ssl[13:16])
+							taxid_dict[ssl[2]][4].append(' '.join([j for j in t_temp if len(j) >= 1]))
 	print("## CoL taxonomic information extraction completed", len(taxid_dict))
 
 	# Export step
@@ -235,9 +243,10 @@ def col_tax_update_new(ustat, fdir, rdir, f_vname):
 			if len(taxid_dict[taxid_list[i_1]][4]) >= 1:
 				for i_2 in range(len(taxid_dict[taxid_list[i_1]][4])):
 					taxid_px = [j.lower() for j in taxid_dict[taxid_list[i_1]][4][i_2].split()]
-					if taxid_px[0] not in genus_dict:
-						genus_dict[taxid_px[0]] = []
-					genus_dict[taxid_px[0]].append(taxid_list[i_1])
+					if len(taxid_px) >= 1:
+						if taxid_px[0] not in genus_dict:
+							genus_dict[taxid_px[0]] = []
+						genus_dict[taxid_px[0]].append(taxid_list[i_1])
 		print(i_1, taxid_list[i_1], taxid_dict[taxid_list[i_1]][3][0:min(20, len(taxid_dict[taxid_list[i_1]][3]))], "                        ", end='\r')
 
 	print("## CoL taxonomy parent mapping completed // file exported")
@@ -314,9 +323,12 @@ def eol_tax_update_new(ustat, fdir, rdir, f_vname):
 				taxid_dict[tar_code] = [tar_code, parent_code, clade_code, "", [], ssl[6]]
 			#
 			if ssl[7] in ["valid", "accepted"]:
-				taxid_dict[tar_code][3] = ssl[5]
-				if ssl[9] != ssl[5] and len(ssl[9]) >= 1:
-					taxid_dict[tar_code][4].append(ssl[9])
+				if len(ssl[9]) >= 1:
+					taxid_dict[tar_code][3] = ssl[9]
+					if ssl[9] != ssl[5]:
+						taxid_dict[tar_code][4].append(ssl[5])
+				else:
+					taxid_dict[tar_code][3] = ssl[5]
 			elif ssl[7] in ["synonym", "ambiguous synonym"]:
 				taxid_dict[ssl[3]][4].append(ssl[5])
 				if ssl[9] != ssl[5] and ssl[9] != taxid_dict[ssl[3]][3] and len(ssl[9]) >= 1:
@@ -345,10 +357,16 @@ def eol_tax_update_new(ustat, fdir, rdir, f_vname):
 		if max(taxid_code[1]) <= 7:
 			if "'" in taxid_dict[taxid_list[i_1]][3]:
 				taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
+			elif ' group' in taxid_dict[taxid_list[i_1]][3] or ' subgroup' in taxid_dict[taxid_list[i_1]][3] or ' clade' in taxid_dict[taxid_list[i_1]][3] or ' complex' in taxid_dict[taxid_list[i_1]][3] or ' cluster' in taxid_dict[taxid_list[i_1]][3] or ' subcluster' in taxid_dict[taxid_list[i_1]][3]:
+				taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
+			elif 'Candidatus ' in taxid_dict[taxid_list[i_1]][3] or 'unclassified ' in taxid_dict[taxid_list[i_1]][3]:
+				taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
+			elif ' subgen. ' in taxid_dict[taxid_list[i_1]][3]:
+				taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3].split()[-1], '|'.join(taxid_dict[taxid_list[i_1]][4])+"|"+taxid_dict[taxid_list[i_1]][3], taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
 			else:
 				taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3].split()[0], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
-		elif taxid_dict[taxid_list[i_1]][5] == "species" and " " in taxid_dict[taxid_list[i_1]][3] and taxid_dict[taxid_list[i_1]][3][0].isupper() == True:
-			taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3].split()[0] + " " + taxid_dict[taxid_list[i_1]][3].split()[1], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
+		#elif taxid_dict[taxid_list[i_1]][5] == "species" and " " in taxid_dict[taxid_list[i_1]][3] and taxid_dict[taxid_list[i_1]][3][0].isupper() == True:
+			#taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3].split()[0] + " " + taxid_dict[taxid_list[i_1]][3].split()[1], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
 		else:
 			taxid_res.append([taxid_list[i_1], taxid_dict[taxid_list[i_1]][3], '|'.join(taxid_dict[taxid_list[i_1]][4]), taxid_dict[taxid_list[i_1]][5], '|'.join(taxid_code[0]), '|'.join([str(j) for j in taxid_code[1][:-1]])])
 		if max(taxid_code[1]) >= 7:

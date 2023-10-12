@@ -291,7 +291,7 @@ def first_bare_match(string, tr_list, rn_dict, rg_dict, rr_dict):
 def lowest_taxon_match(prev_map, prev_stat, tr_list, rn_dict, rr_dict):
 	#
 	broad_type = {
-	"|R|": "Archaea", "|B|": "Bacteria", "|F|": "Fungi", "|N|": "Metazoa", "|P|": "Plant", 
+	"|R|": "Archaea", "|B6LM6|": "Bacteria", "|F|": "Fungi", "|N|": "Metazoa", "|P|": "Plant", 
 	"|EOL-000000024748|": "Archaea", "|EOL-000000000003|": "Bacteria", "|EOL-000002172573|": "Fungi", "|EOL-000000541397|": "Metazoa", "|EOL-000000097815|": "Plant", 
 	"|2|-": "Archaea", "|3|": "Bacteria", "|5|": "Fungi", "|1|": "Metazoa", "|6|": "Plant", 
 	"|2157|": "Archaea", "|2|131567|": "Bacteria", "|4751|": "Fungi", "|33208|": "Metazoa", "|33090|": "Plant"
@@ -302,7 +302,8 @@ def lowest_taxon_match(prev_map, prev_stat, tr_list, rn_dict, rr_dict):
 	#
 	for ltm_1 in range(len(tr_list)):
 		if prev_stat[ltm_1] >= 10:
-			ltm_sub = {}
+			match_type_r = "(others)"
+			match_r_list = []
 			#
 			for ltm_2 in range(len(tr_list)):
 				if prev_stat[ltm_2] < 5: # Accept exact match only
@@ -310,39 +311,52 @@ def lowest_taxon_match(prev_map, prev_stat, tr_list, rn_dict, rr_dict):
 					for ltm_3 in prev_map[ltm_2]:
 						phylo_tree = rn_dict[tr_list[ltm_2]][ltm_3][4].split("|")
 						phylo_rank = [int(j) for j in rn_dict[tr_list[ltm_2]][ltm_3][5].split("|")]
-						match_type_r = "(others)"
 						for ltm_11 in broad_type:
-							if ltm_11 in rn_dict[tr_list[ltm_2]][ltm_3][4]:
+							if ltm_11 in rn_dict[tr_list[ltm_2]][ltm_3][4] and match_type_r == "(others)":
 								match_type_r = broad_type[ltm_11]
+								for ltm_12 in phylo_tree:
+									if ltm_12 in rn_dict[tr_list[ltm_2]]:
+										match_r_list.append(rn_dict[tr_list[ltm_2]][ltm_12][1].lower())
 								break
-						#
-						for ltm_4 in range(len(phylo_tree)):
-							if phylo_tree[ltm_4] in rn_dict[tr_list[ltm_2]]:
-								tar_taxon = rn_dict[tr_list[ltm_2]][phylo_tree[ltm_4]][1].lower()
-								if tar_taxon in rr_dict[tr_list[ltm_1]]:
-									for ltm_5 in rr_dict[tr_list[ltm_1]][tar_taxon]:
-										match_type_c = "(others)"
-										for ltm_12 in broad_type:
-											if ltm_12 in rn_dict[tr_list[ltm_1]][ltm_5][4]:
-												match_type_c = broad_type[ltm_12]
-												break
-										if match_type_c == match_type_r:
-											ltm_sub[ltm_5] = max(phylo_rank[ltm_4:])
-									break
+			#
+			ltm_sub = {}
+			ltm_depth = {}
+			for ltm_2 in prev_map[ltm_1]:
+				phylo_tree = rn_dict[tr_list[ltm_1]][ltm_2][4].split("|")
+				phylo_rank = [int(j) for j in rn_dict[tr_list[ltm_1]][ltm_2][5].split("|")]
+				match_type_c = "(others)"
+				for ltm_12 in broad_type:
+					if ltm_12 in rn_dict[tr_list[ltm_1]][ltm_2][4]:
+						match_type_c = broad_type[ltm_12]
+						break
+				if match_type_c == match_type_r:
+					ltm_sub[ltm_2] = max(phylo_rank)
+					phylo_tree_names = []
+					phylo_score = 0
+					for ltm_13 in phylo_tree:
+						if ltm_13 in rn_dict[tr_list[ltm_1]]:
+							phylo_tree_names.append(rn_dict[tr_list[ltm_1]][ltm_13][1].lower())
+					for ltm_14 in phylo_tree_names:
+						if ltm_14 in match_r_list:
+							phylo_score += 1
+					ltm_depth[ltm_2] = phylo_score
 			#
 			if len(ltm_sub) == 0:
 				for ltm_10 in prev_map[ltm_1]:
 					ltm_sub[ltm_10] = max([int(j) for j in rn_dict[tr_list[ltm_1]][ltm_10][5].split("|")])
+					ltm_depth[ltm_10] = 0
 			elif max(ltm_sub.values()) < 7 and len(prev_map[ltm_1]) >= 1:
 				for ltm_10 in prev_map[ltm_1]:
 					ltm_sub[ltm_10] = max([int(j) for j in rn_dict[tr_list[ltm_1]][ltm_10][5].split("|")])
+					ltm_depth[ltm_10] = 0
 			#
 			if len(ltm_sub) >= 1:
 				ltm_sub = dict(sorted(ltm_sub.items(), key=lambda item: item[1], reverse = True))
 				lt_match[ltm_1][:] = []
 				ltm_max_depth = max(ltm_sub.values())
+				ltm_max_score = max(ltm_depth.values())
 				for ltm_6 in ltm_sub:
-					if ltm_sub[ltm_6] == ltm_max_depth:
+					if ltm_sub[ltm_6] == ltm_max_depth and ltm_depth[ltm_6] == ltm_max_score:
 						lt_match[ltm_1].append(ltm_6)
 						lt_stat[ltm_1] = 18-ltm_sub[ltm_6]
 					else:

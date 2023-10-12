@@ -6,7 +6,7 @@ A python-based high-throughput scientific name mapping algorithm
 
 - [In a nutshell](#in-a-nutshell)
 - [Summary](#summary)
-- [Installation guide](#installation-guide)
+- [Initialization guide](#initialization-guide)
 - [Update guide](#update-guide)
 - [Usage guide](#usage-guide)
 - [Result format guide](#result-format-guide)
@@ -28,9 +28,13 @@ PhyloSophos is a high-throughput scientific name processor which achieves greate
 
 Please refer to "phylosophos_guide.pdf" for detailed information on the package and instructions on how to use and modify it.
 
-## Installation guide
+## Initialization guide
 
-PhyloSophos requires Numpy, along with other basic libraries of Python 3. Before initializing PhyloSophos to fit with your environment, please set up an environment with a python version >=3.7 (preferably with Conda), and install numpy (https://numpy.org/install/) as appropriate.
+PhyloSophos requires Numpy, along with other basic libraries of Python 3. Before initializing PhyloSophos to fit with your environment, please set up an environment with a python version >=3.7 (preferably with Conda), and install numpy (https://numpy.org/install/) as appropriate. 
+
+Then, clone this repository as:
+
+<pre><code>git clone https://github.com/mhcho4096/phylosophos</code></pre>
 
 A script for initialization and update is phylosophos_initialize_update.py. This script will download raw taxonomic metadata from Catalogue of Life (CoL), Encyclopedia of Life (EoL), and NCBI Taxonomy, and then process it into reference files. You may execute this script as:
 

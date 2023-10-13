@@ -7,6 +7,7 @@ A python-based high-throughput scientific name mapping algorithm
 - [In a nutshell](#in-a-nutshell)
 - [Summary](#summary)
 - [System requirements](#system-requirements)
+- [Installation guide](#installation-guide)
 - [Initialization guide](#initialization-guide)
 - [Taxonomic reference update guide](#taxonomic-reference-update-guide)
 - [Usage guide](#usage-guide)
@@ -41,7 +42,7 @@ PhyloSophos requires a minimum of approximately 6.0GB of storage space for downl
 
 PhyloSophos requires a minimum of 8GB RAM for conducting taxonomic mapping with three base reference files. An additional 8GB RAM is required for incorporating GBIF reference.
 
-## Initialization guide
+## Installation guide
 
 PhyloSophos requires Numpy, along with other basic libraries of Python 3. Before initializing PhyloSophos to fit with your environment, please set up an environment with a python version >=3.8 (preferably with Conda), and install numpy (https://numpy.org/install/) as appropriate. 
 
@@ -58,6 +59,8 @@ To use PhyloSophos, clone this repository as:
 <pre><code>git clone https://github.com/mhcho4096/phylosophos</code></pre>
 
 Please navigate to the downloaded repository directory before proceeding.
+
+## Initialization guide
 
 A script for initialization and update is **phylosophos_initialize_update.py**. This script will download raw taxonomic metadata from Catalogue of Life (CoL), Encyclopedia of Life (EoL), and NCBI Taxonomy, and then process it into reference files. You may execute this script as:
 

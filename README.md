@@ -53,7 +53,7 @@ conda activate phylosophos
 conda install -c anaconda numpy
 ```
 
-Then, clone this repository as:
+To use PhyloSophos, clone this repository as:
 
 <pre><code>git clone https://github.com/mhcho4096/phylosophos</code></pre>
 

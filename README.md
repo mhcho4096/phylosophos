@@ -30,7 +30,7 @@ python phylosophos_core.py [[optional_parameter_type] [optional_parameter_value]
 
 PhyloSophos is a high-throughput scientific name processor which achieves greater mapping performance by referencing multiple taxonomic references and recognizing the semantic structure of scientific names. It also corrects common Latin variants and vernacular names, which often appear in various biological databases and resources. 
 
-Please refer to "phylosophos_guide.pdf" for detailed information on the package and instructions on how to use and modify it.
+Please refer to **phylosophos_guide.pdf** for detailed information on the package and instructions on how to use and modify it.
 
 ## System requirements
 

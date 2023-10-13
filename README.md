@@ -77,7 +77,8 @@ In this case, optional update parameter affects the downstream process: by defau
 
 ## Usage guide
 
-PhyloSophos analysis could be performed by executing phylosophos_core.py script. You may execute this script as:
+PhyloSophos analysis could be performed by executing phylosophos_core.py script. Please make sure to put your input file inside the "/input" directory before proceeding.
+You may execute this script as:
 
 <pre><code>python phylosophos_core.py [[optional_parameter_type] [optional_parameter_value]]</code></pre>
 
@@ -85,7 +86,7 @@ PhyloSophos currently recognizes five types of optional parameters.
 
 * Help (-h, -help, -guide): if one of these arguments is given, a hard-coded guide to PhyloSophos will appear in the console. This will provide simple instructions on how to customize PhyloSophos mapping parameters. No following parameter value is required.
 * Reference type change (-r, -ref): if one of these arguments is given, PhyloSophos will change the database of choice to the one specified by the following argument. The default setting is 'ncbi', while 'col' and 'eol' are also available in basic PhyloSophos system. You may change the default setting by modifying /ps_init/ps_initialize.py (see lines 56, 60 & 62). If you want to include other types of references into PhyloSophos system, please read chapter 6.
-* Input type change (-i, -input): if one of these arguments is given, along with the name of the input file, PhyloSophos will specifically import the given file as an input. If not (as a default setting), PhyloSophos will consider all files within the /input directory to be scientific name input files.
+* Input type change (-i, -input): if one of these arguments is given, along with the name of the input file, PhyloSophos will specifically import the given file as an input. If not (as a default setting), PhyloSophos will consider all files within the "/input" directory to be scientific name input files.
 * Levenshtein distance cutoff (-l, -lev, -cutoff): if one of these arguments is given, along with an integer value, PhyloSophos will change the edit distance cutoff (default setting = 3) to the specified value. 
 * Manual curation status (-m, -manual, -curation): if one of these arguments is given, along with a value 1, PhyloSophos will import /pp_learning/manual_curation_list.tsv and utilize this information to pre-process inputs. If not (as a default setting), PhyloSophos will not import extra information other than reference data files within /pp_ref directory.
 

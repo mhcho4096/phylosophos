@@ -59,25 +59,25 @@ Then, clone this repository as:
 
 Please navigate to the downloaded repository directory before proceeding.
 
-A script for initialization and update is phylosophos_initialize_update.py. This script will download raw taxonomic metadata from Catalogue of Life (CoL), Encyclopedia of Life (EoL), and NCBI Taxonomy, and then process it into reference files. You may execute this script as:
+A script for initialization and update is **phylosophos_initialize_update.py**. This script will download raw taxonomic metadata from Catalogue of Life (CoL), Encyclopedia of Life (EoL), and NCBI Taxonomy, and then process it into reference files. You may execute this script as:
 
 <pre><code>python phylosophos_initialize_update.py [optional_update_parameter]</code></pre>
 
-For initialization purposes, the optional parameter will not affect downstream processes. It is possible for Catalogue of Life and Encyclopedia of Life to change the name of the metadata file in their FTP server. If this happens, please change file names in the phylosophos_initialize_update.py (see lines 76 & 77) as appropriate.
+For initialization purposes, the optional parameter will not affect downstream processes. It is possible for Catalogue of Life and Encyclopedia of Life to change the name of the metadata file in their FTP server. If this happens, please change file names in the **phylosophos_initialize_update.py** (see lines 76 & 77) as appropriate.
 
 In addition, there was an instance when the taxonomic databases changed the format of their metadata, making the initialization script non-functional. If this happens, please notify me immediately (see contact information).
 
 ## Taxonomic reference update guide
 
-Again, taxonomic reference update uses phylosophos_initialize_update.py script. You may execute this script as:
+Again, taxonomic reference update uses **phylosophos_initialize_update.py** script. You may execute this script as:
 
 <pre><code>python phylosophos_initialize_update.py 1</code></pre>
 
-In this case, optional update parameter affects the downstream process: by default, if a database metadata file is found in the /external files directory, the metadata download step is skipped to reduce processing time (allowing manual download of reference metadata). If an integer value other than 0 is given as an optional argument, the update script will start downloading the reference metadata file, overriding any pre-existing data.
+In this case, optional update parameter affects the downstream process: by default, if a database metadata file is found in the **/external files** directory, the metadata download step is skipped to reduce processing time (allowing manual download of reference metadata). If an integer value other than 0 is given as an optional argument, the update script will start downloading the reference metadata file, overriding any pre-existing data.
 
 ## Usage guide
 
-PhyloSophos analysis could be performed by executing phylosophos_core.py script. Please make sure to put your input file inside the "/input" directory before proceeding.
+PhyloSophos analysis could be performed by executing **phylosophos_core.py** script. Please make sure to put your input file inside the **/input** directory before proceeding.
 You may execute this script as:
 
 <pre><code>python phylosophos_core.py [[optional_parameter_type] [optional_parameter_value]]</code></pre>
@@ -85,12 +85,12 @@ You may execute this script as:
 PhyloSophos currently recognizes five types of optional parameters.
 
 * Help (-h, -help, -guide): if one of these arguments is given, a hard-coded guide to PhyloSophos will appear in the console. This will provide simple instructions on how to customize PhyloSophos mapping parameters. No following parameter value is required.
-* Reference type change (-r, -ref): if one of these arguments is given, PhyloSophos will change the database of choice to the one specified by the following argument. The default setting is 'ncbi', while 'col' and 'eol' are also available in basic PhyloSophos system. You may change the default setting by modifying /ps_init/ps_initialize.py (see lines 56, 60 & 62). If you want to include other types of references into PhyloSophos system, please read chapter 6.
-* Input type change (-i, -input): if one of these arguments is given, along with the name of the input file, PhyloSophos will specifically import the given file as an input. If not (as a default setting), PhyloSophos will consider all files within the "/input" directory to be scientific name input files.
+* Reference type change (-r, -ref): if one of these arguments is given, PhyloSophos will change the database of choice to the one specified by the following argument. The default setting is 'ncbi', while 'col' and 'eol' are also available in basic PhyloSophos system. You may change the default setting by modifying **/ps_init/ps_initialize.py** (see lines 56, 60 & 62). If you want to include other types of references into PhyloSophos system, please read chapter 6.
+* Input type change (-i, -input): if one of these arguments is given, along with the name of the input file, PhyloSophos will specifically import the given file as an input. If not (as a default setting), PhyloSophos will consider all files within the **/input** directory to be scientific name input files.
 * Levenshtein distance cutoff (-l, -lev, -cutoff): if one of these arguments is given, along with an integer value, PhyloSophos will change the edit distance cutoff (default setting = 3) to the specified value. 
-* Manual curation status (-m, -manual, -curation): if one of these arguments is given, along with a value 1, PhyloSophos will import /pp_learning/manual_curation_list.tsv and utilize this information to pre-process inputs. If not (as a default setting), PhyloSophos will not import extra information other than reference data files within /pp_ref directory.
+* Manual curation status (-m, -manual, -curation): if one of these arguments is given, along with a value 1, PhyloSophos will import **/pp_learning/manual_curation_list.tsv** and utilize this information to pre-process inputs. If not (as a default setting), PhyloSophos will not import extra information other than reference data files within /pp_ref directory.
 
-The following is the example result of executing PhyloSophos with a sample input file ("sample_scientific_name_inputs.txt"), which includes 4,010 scientific name strings.
+The following is the example result of executing PhyloSophos with a sample input file (**sample_scientific_name_inputs.txt**), which includes 4,010 scientific name strings.
 
 ```
 
@@ -112,9 +112,9 @@ The following is the example result of executing PhyloSophos with a sample input
 
 ## Result format guide
 
-The results of the PhyloSophos analysis will be deposited in the /result directory. The name of the result file will be "phylosophos_result_[export_date]\_[export_time]\_[input_file_name]". [export_date] and [export_time] will be six-digit numbers. 
+The results of the PhyloSophos analysis will be deposited in the **/result** directory. The name of the result file will be **phylosophos_result_[export_date]\_[export_time]\_[input_file_name]**. [export_date] and [export_time] will be six-digit numbers. 
 
-The following is an excerpt from the example result file generated by executing PhyloSophos with a sample input file ("sample_scientific_name_inputs.txt").
+The following is an excerpt from the example result file generated by executing PhyloSophos with a sample input file (**sample_scientific_name_inputs.txt**).
 
 |	Input_file_name	|	Input_original_order	|	Raw_name_input	|	Pre_corrected_input	|	Chosen_reference	|	Chosen_reference_mapped_ID	|	Chosen_reference_scientific_name	|	Chosen_reference_mapping_status_code	|	Chosen_reference_mapping_status_description	|	col_mapped_ID	|	col_scientific_name	|	col_mapping_status_code	|	eol_mapped_ID	|	eol_scientific_name	|	eol_mapping_status_code	|	gbif_mapped_ID	|	gbif_scientific_name	|	gbif_mapping_status_code	|	ncbi_mapped_ID	|	ncbi_scientific_name	|	ncbi_mapping_status_code	|	Manual_curation_recommended	|
 |	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|	----	|
@@ -140,7 +140,7 @@ PhyloSophos result file has the following format (delimited by tabs). Each colum
 * (specific_reference)\_mapping\_status_code: PhyloSophos mapping status code (based on specific reference)
 * Manual_curation_recommended: Mapping status code-based opinion on whether manual curation is needed for this mapping result
 
-Each taxonomic reference found within /pp_ref directory provides [(specific\_reference)\_mapped\_id] - [(specific\_reference)\_scientific\_name] - [(specific\_reference)\_mapping_status\_code] column triplet. Base PhyloSophos provides 3 column triplets for CoL/EoL/NCBI taxonomy respectively.
+Each taxonomic reference found within **/pp_ref** directory provides **[(specific\_reference)\_mapped\_id] - [(specific\_reference)\_scientific\_name] - [(specific\_reference)\_mapping_status\_code]** column triplet. Base PhyloSophos provides 3 column triplets for CoL/EoL/NCBI taxonomy respectively.
 
 ## Citing PhyloSophos
 

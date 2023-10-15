@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+package/phylosophos/__init__.py
+package/phylosophos/gbif_extra.py
+package/phylosophos/phylosophos_core.py
+package/phylosophos/phylosophos_initialize_update.py
+package/phylosophos/ps_analysis.py
+package/phylosophos/ps_initialize.py
+package/phylosophos/ps_update.py
+package/phylosophos.egg-info/PKG-INFO
+package/phylosophos.egg-info/SOURCES.txt
+package/phylosophos.egg-info/dependency_links.txt
+package/phylosophos.egg-info/requires.txt
+package/phylosophos.egg-info/top_level.txt

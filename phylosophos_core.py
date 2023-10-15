@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from phylosophos import phylosophos_core
+from phylosophos.phylosophos_core import phylosophos
 
-phylosophos_core.phylosophos()
+phylosophos()
 

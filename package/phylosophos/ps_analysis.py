@@ -951,7 +951,7 @@ def phylosophos_result_export(input_name, raw_list, precalc_list, mapping_result
 
 	# Mapping data export
 
-	b_path = os.path.realpath(__file__)[:len(os.path.realpath(__file__))-len(os.path.basename(__file__))-12]
+	b_path = os.getcwd()+"\\"
 	with open(b_path+"result\\"+export_file_name, 'w', encoding = 'UTF-8', errors = 'ignore') as res_f:
 		res_f.write('\t'.join(export_header) + '\n')
 		for i_1 in range(len(mapping_results)):
@@ -991,7 +991,7 @@ def phylosophos_core_analysis(input_list, tr_list, rn_dict, rg_dict, rr_dict, re
 	manual_dict = {}
 
 	if manual_stat == True:
-		b_path = os.path.realpath(__file__)[:len(os.path.realpath(__file__))-len(os.path.basename(__file__))-12]
+		b_path = os.getcwd()+"\\"
 		with open(b_path+"pp_learning\\manual_curation_list.tsv", encoding = "UTF-8") as inp_f:
 			inp_f.readline()
 			for line in inp_f:

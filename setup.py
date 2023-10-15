@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
 	name = 'phylosophos',
-	version = '1.1.1', 
+	version = '1.1.3', 
 	author = 'Min Hyung Cho', 
 	author_email = 'mhcho@bmdrc.org', 
 	description = 'PhyloSophos scientific name mapper', 
@@ -18,4 +18,6 @@ setuptools.setup(
 	install_requires= ["numpy"],
 	py_modules=['phylosophos'],
 	license='MIT',
+	package_dir={"": "package"},
+	packages=setuptools.find_packages(where="package"),
 )

@@ -41,7 +41,7 @@ def phylosophos_initialization(arg_list):
 
 	print("#### PhyloSophos initialization started ####")
 
-	ref_dir = os.path.realpath(__file__)[:len(os.path.realpath(__file__))-len(os.path.basename(__file__))-8]+"pp_ref\\"
+	ref_dir = os.getcwd()+"\\pp_ref\\"
 	ref_pool = [j.split("_")[0] for j in os.listdir(ref_dir) if j[-4:] == ".txt"]
 	default_reference = "ncbi" # Change default setting as appropriate
 	ref_type = ""
@@ -107,7 +107,7 @@ def phylosophos_initialization(arg_list):
 
 def phylosophos_help():
 
-	ref_dir = os.path.realpath(__file__)[:len(os.path.realpath(__file__))-len(os.path.basename(__file__))-8]+"pp_ref\\"
+	ref_dir = os.getcwd()+"\\pp_ref\\"
 	ref_pool = list(numpy.unique([j.split("_")[0] for j in os.listdir(ref_dir) if j[-4:] == ".txt"]))
 
 	#
@@ -148,7 +148,7 @@ def phylosophos_help():
 
 def phylosophos_input_import(i_type, i_fname):
 
-	input_dir = os.path.realpath(__file__)[:len(os.path.realpath(__file__))-len(os.path.basename(__file__))-8]+"input\\"
+	input_dir = os.getcwd()+"\\input\\"
 	pii_input_list = []
 
 	print("#### Input file import started ####", end='\r')

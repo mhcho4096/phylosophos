@@ -1,3 +1,16 @@
+Metadata-Version: 2.1
+Name: phylosophos
+Version: 1.1.1
+Summary: PhyloSophos scientific name mapper
+Home-page: https://github.com/mhcho4096/phylosophos
+Author: Min Hyung Cho
+Author-email: mhcho@bmdrc.org
+License: MIT
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy
+
 # PhyloSophos
 
 A python-based high-throughput scientific name mapping algorithm

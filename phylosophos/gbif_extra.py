@@ -25,10 +25,6 @@ from urllib import request
 
 ####
 
-base_path = os.path.realpath(__file__)[:-21]
-ef_path = "external_files\\"
-pp_path = "pp_ref\\"
-
 ssl._create_default_https_context = ssl._create_unverified_context
 
 ####
@@ -196,14 +192,17 @@ def gbif_tax_update(ustat, fdir, rdir):
 
 	print("## GBIF taxonomy mapping completed",  "        ")
 
-#### Main part
+####
 
-def main():
+def gbif_update():
+	base_path = os.getcwd()+"\\"
+	ef_path = base_path+"external_files\\"
+	pp_path = base_path+"pp_ref\\"
+	
 	update_stat = int(sys.argv[1])
 	gbif_tax_update(update_stat, ef_path, pp_path)
 
-if __name__ == "__main__":
-	main()
+
 
 
 

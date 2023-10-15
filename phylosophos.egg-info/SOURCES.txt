@@ -1,0 +1,9 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+phylosophos.egg-info/PKG-INFO
+phylosophos.egg-info/SOURCES.txt
+phylosophos.egg-info/dependency_links.txt
+phylosophos.egg-info/requires.txt
+phylosophos.egg-info/top_level.txt

@@ -62,7 +62,7 @@ def gbif_tax_update(ustat, fdir, rdir):
 	taxid_raw = {}
 	accepted_names = {}
 
-	with open(fdir+"gbif_taxdump\\"+"Taxon.tsv", encoding="UTF-8", errors='ignore') as inp_f:
+	with open(fdir+"gbif_taxdump\\backbone\\"+"Taxon.tsv", encoding="UTF-8", errors='ignore') as inp_f:
 		inp_f.readline()
 		for line in inp_f:
 			ssl = line.rstrip('\n').split('\t')

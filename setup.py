@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
 	name = 'phylosophos',
-	version = '1.1.3', 
+	version = '1.1.4', 
 	author = 'Min Hyung Cho', 
 	author_email = 'mhcho@bmdrc.org', 
 	description = 'PhyloSophos scientific name mapper', 
